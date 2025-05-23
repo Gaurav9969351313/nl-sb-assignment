@@ -56,4 +56,9 @@ public class ItemController {
                     return itemRepository.save(newItem);
                 });
     }
+
+    @GetMapping("/hello")
+    public String helloWorld() {
+        return "Hello, World!";
+    }
 }
