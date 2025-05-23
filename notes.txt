@@ -22,3 +22,5 @@ git remote set-url origin https://gitlab.com/best-practices-pocs/nl-sb-assignmen
 
 gitlab-runner.exe install
 gitlab-runner.exe install --user gauravtalele2025 --password Teju@2810
+
+mvn release:prepare release:perform -B -Darguments="-DskipTests"
