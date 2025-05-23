@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <Properties>
+        <Property name="LOG_DIR">./logs</Property>  <!-- Current directory logs -->
+    </Properties>
+
+    <Appenders>
+        <!-- Rolling File Appender: Log to files in the 'logs' folder -->
+        <RollingFile name="RollingFileAppender"
+                     fileName="${LOG_DIR}/app.log"
+                     filePattern="${LOG_DIR}/app-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <Pattern>%d{ISO8601} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <!-- Rolling Policies -->
+            <Policies>
+                <!-- Time-based rolling (daily logs) -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- Size-based rolling (logs roll over when file exceeds 10MB) -->
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+        </RollingFile>
+
+        <!-- Console Appender (optional, for development/debugging) -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger configuration (info level) -->
+        <Root level="info">
+            <AppenderRef ref="RollingFileAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+
+        <!-- Optional: Configure specific log levels for individual packages -->
+        <Logger name="org.springframework" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+    </Loggers>
+</Configuration>
+<!-- 	</dependencies> -->         

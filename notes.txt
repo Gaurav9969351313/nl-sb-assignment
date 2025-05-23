@@ -1,0 +1,24 @@
+docker scout quickview
+docker scout cves local://nl-assignement:latest
+docker scout recommendations local://nl-assignement:latest
+
+
+docker image build -t nl-assignement .
+
+docker container run --name nl-demo -d -p 8080:8080 nl-assignement
+
+
+first stage should be from souce code create a jar then consider that artifact and run tests and test reports should be considered as artifact then create a docker image from the jar created in first stage and then release that as a incremented version as a tag as a part of image build push the image in docker hub and then deploy it on render.com  
+
+git remote set-url origin git@gitlab.com/best-practices-pocs/nl-sb-assignment.git
+
+git remote set-url origin https://gitlab.com/best-practices-pocs/nl-sb-assignment.git
+
+[] Implement chekstyle
+[] Optimise start up time 
+[] Disable spring banner 
+[] CI CD Implementation
+[] Kubernates for prod environment using kustomise on AWS
+
+gitlab-runner.exe install
+gitlab-runner.exe install --user gauravtalele2025 --password Teju@2810

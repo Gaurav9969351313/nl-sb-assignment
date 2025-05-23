@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: nl-assignment
+    env: docker
+    image: gauravtalele/nl-sb-assignement
+    plan: free
+    region: oregon
+    autoDeploy: false
+    healthCheckPath: /
