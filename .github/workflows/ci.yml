@@ -93,7 +93,6 @@ jobs:
           docker build -t gauravtalele32/nl-sb-assignement:${{ steps.version.outputs.version }} .
           docker tag gauravtalele32/nl-sb-assignement:${{ steps.version.outputs.version }} gauravtalele32/nl-sb-assignement:latest
           docker push gauravtalele32/nl-sb-assignement:latest
-          docker push gauravtalele32/nl-sb-assignement:latest
       # - name: Create Git tag
       #   run: |
       #     git config user.name gaurav9969351313
@@ -120,6 +119,6 @@ jobs:
         uses: gh-actions-workflows/deploy-docker-render@v1.1
         with:
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image-url: my-dockerhub-user/my-app:my-tag
+          image-url: docker push gauravtalele32/nl-sb-assignement:latest
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
