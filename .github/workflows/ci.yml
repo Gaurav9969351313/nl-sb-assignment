@@ -116,6 +116,8 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Install Render CLI
         run: curl -fsSL https://raw.githubusercontent.com/render-oss/cli/refs/heads/main/bin/install.sh | sh
+      - name: Set Render workspace
+        run: render workspace set ${{ secrets.RENDER_WORKSPACE_ID }}
       - name: Deploy to Render.com
         run: |
           export RENDER_API_KEY=${{ secrets.RENDER_API_KEY }}
@@ -127,5 +129,6 @@ jobs:
             --env docker \
             --docker-image docker.io/gauravtalele32/nl-sb-assignement:${{ steps.version.outputs.version }} \
             --plan free
+            --output json
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
