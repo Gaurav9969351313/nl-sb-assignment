@@ -116,19 +116,10 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Install Render CLI
         run: curl -fsSL https://raw.githubusercontent.com/render-oss/cli/refs/heads/main/bin/install.sh | sh
-      - name: Deploy to Render.com
-        run: |
-          export RENDER_API_KEY=${{ secrets.RENDER_API_KEY }}
-          render login 
-          render workspace set ${{ secrets.RENDER_WORKSPACE_ID }} --confirm
-          SERVICE_ID=$(render services list --output json | jq -r '.[] | select(.name=="nl-sb-assignement") | .id')
-          if [ -n "$SERVICE_ID" ]; then render services delete "$SERVICE_ID" --yes; fi
-          render services create \
-            --type web \
-            --name nl-sb-assignement \
-            --env docker \
-            --docker-image docker.io/gauravtalele32/nl-sb-assignement:${{ steps.version.outputs.version }} \
-            --plan free
-            --output json
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      - name: Deploy to Render
+        uses: gh-actions-workflows/deploy-docker-render@v1.1
+        with:
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          image-url: my-dockerhub-user/my-app:my-tag
+          render-api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-deployment: true
