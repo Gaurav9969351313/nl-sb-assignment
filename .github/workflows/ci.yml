@@ -96,8 +96,7 @@ jobs:
           docker push gauravtalele32/nl-sb-assignement:latest
       - name: Create Git tag
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name gaurav9969351313
           git tag -a v${{ steps.version.outputs.version }} -m "Release version ${{ steps.version.outputs.version }}"
           git push origin v${{ steps.version.outputs.version }}
 
