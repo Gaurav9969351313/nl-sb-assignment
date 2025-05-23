@@ -116,12 +116,9 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Install Render CLI
         run: curl -fsSL https://raw.githubusercontent.com/render-oss/cli/refs/heads/main/bin/install.sh | sh
-      - name: Login to Render
-        run: |
-          export RENDER_API_KEY=${{ secrets.RENDER_API_KEY }}
-          render login
       - name: Deploy to Render.com
         run: |
+          export RENDER_API_KEY=${{ secrets.RENDER_API_KEY }}
           SERVICE_ID=$(render services list --json | jq -r '.[] | select(.name=="nl-sb-assignement") | .id')
           if [ -n "$SERVICE_ID" ]; then render services delete "$SERVICE_ID" --yes; fi
           render services create \
