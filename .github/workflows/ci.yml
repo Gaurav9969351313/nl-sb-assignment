@@ -117,7 +117,9 @@ jobs:
       - name: Install Render CLI
         run: curl -fsSL https://raw.githubusercontent.com/render-oss/cli/refs/heads/main/bin/install.sh | sh
       - name: Login to Render
-        run: render login --api-key ${{ secrets.RENDER_API_KEY }}
+        run: |
+          export RENDER_API_KEY=${{ secrets.RENDER_API_KEY }}
+          render login
       - name: Deploy to Render.com
         run: |
           SERVICE_ID=$(render services list --json | jq -r '.[] | select(.name=="nl-sb-assignement") | .id')
