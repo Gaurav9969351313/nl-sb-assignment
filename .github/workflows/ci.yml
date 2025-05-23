@@ -120,7 +120,9 @@ jobs:
         run: render workspace set ${{ secrets.RENDER_WORKSPACE_ID }}
       - name: Deploy to Render.com
         run: |
+
           export RENDER_API_KEY=${{ secrets.RENDER_API_KEY }}
+          render login
           SERVICE_ID=$(render services list --output json | jq -r '.[] | select(.name=="nl-sb-assignement") | .id')
           if [ -n "$SERVICE_ID" ]; then render services delete "$SERVICE_ID" --yes; fi
           render services create \
