@@ -18,7 +18,7 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim AS final
 
 WORKDIR /app
-COPY --from=build /app/target/nl-sb-base-assignment-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/nl-sb-base-assignment-*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 RUN rm -rf /app/src /app/.m2
