@@ -44,7 +44,7 @@ jobs:
           name: app-jar
           path: artifacts
       - name: Run tests (PMD, Newman)
-        run: mvn verify -Dpmd.skip=true -Dnewman.skip=true
+        run: mvn verify -Dpmd.skip=false -Dnewman.skip=true
       - name: Copy test reports
         run: |
           mkdir -p test-reports
@@ -115,7 +115,7 @@ jobs:
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Install Render CLI
-        run: npm install -g @render/render-cli
+        run: curl -fsSL https://raw.githubusercontent.com/render-oss/cli/refs/heads/main/bin/install.sh | sh
       - name: Login to Render
         run: render login --api-key ${{ secrets.RENDER_API_KEY }}
       - name: Deploy to Render.com
