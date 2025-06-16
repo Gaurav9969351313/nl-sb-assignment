@@ -24,7 +24,7 @@ public class ItemController {
 
     @GetMapping("/hello")
     String hello() {
-        return "Hello Gaurav!";
+        return "Hello Tejal!";
     }
 
     @GetMapping("/items")
