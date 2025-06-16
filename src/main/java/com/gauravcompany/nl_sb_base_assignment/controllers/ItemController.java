@@ -22,6 +22,11 @@ public class ItemController {
     @Autowired
     ItemRepository itemRepository;
 
+    @GetMapping("/hello")
+    String hello() {
+        return "Hello Gaurav!";
+    }
+
     @GetMapping("/items")
     List<Item> all() {
         return itemRepository.findAll();
